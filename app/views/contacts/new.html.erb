@@ -1,0 +1,26 @@
+<h1>Contacts#new</h1>
+<p> have a question or want to work with us  ? drop us a message ! </p> 
+<%= form_with( mode: @contact, url: contacts_path, method: :post) do  |form| %>
+  <% if @contact.errors.any? %> 
+    <div style="color:red">
+       <h2><%= pularize(@contact.errors.count, "error ") %> prohibted this contact from being saved : </h2> 
+       <ul>
+         <% @contacts.errors.full_messages.each do  |message| %> 
+           <li> <%= message %> </li>
+         <%end%> 
+       </ul>
+    </div>
+  <% end %> 
+  <div style="margin-bottom: 10px ;">
+    <%= form.label :name %><br> 
+    <% form.text_field :name , required: true %> 
+  </div> 
+  <div style="margin-bottom: 10px ;">
+    <%= form.label :message %> <br> 
+    <%= form.text_area :message, rows: 6 , required: true %> 
+  </div>
+  <div> 
+    <%= form.submit "send message " %> 
+  </div>
+<% end %>
+

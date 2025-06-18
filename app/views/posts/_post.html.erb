@@ -1,0 +1,28 @@
+<%# app/views/posts/_post.html.erb %>
+<div class="post-card">
+  <%# Make the entire image a clickable link to the post %>
+  <%= link_to post do %>
+    <% if post.featured_image.attached? %>
+      <%= image_tag post.featured_image.variant(:thumb), alt: post.image_alt, class: "post-card-image" %>
+    <% else %>
+      <%# Fallback placeholder if no image is attached %>
+      <div class="post-card-image-placeholder">No Image</div>
+    <% end %>
+  <% end %>
+
+  <div class="post-card-body">
+    <%# Post title, also a link %>
+    <h3 class="post-card-title">
+      <%= link_to post.title, post %>
+    </h3>
+
+    <%# A short, truncated version of the content for the preview %>
+    <p class="post-card-excerpt">
+      <%= truncate(post.content, length: 100) %>
+    </p>
+
+    <div class="post-card-meta">
+      <small>Posted on <%= post.created_at.to_date.strftime("%b %d, %Y") %></small>
+    </div>
+  </div>
+</div>

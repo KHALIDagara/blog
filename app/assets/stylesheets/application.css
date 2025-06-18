@@ -1,0 +1,94 @@
+/*
+ * This is a manifest file that'll be compiled into application.css.
+ *
+ * With Propshaft, assets are served efficiently without preprocessing steps. You can still include
+ * application-wide styles in this file, but keep in mind that CSS precedence will follow the standard cascading order, meaning styles declared later in the document or manifest will override earlier ones, depending on specificity.
+ *
+ * Consider organizing styles into separate files for maintainability.
+ */
+/* app/assets/stylesheets/application.css */
+
+/*
+ * Post Card Grid Container
+ * This uses CSS Grid to create a responsive layout.
+ * It will try to fit as many 350px cards as it can, and they'll grow to fill space.
+*/
+.posts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem; /* The space between cards */
+  padding: 20px 0;
+}
+
+/*
+ * Individual Card Styling
+*/
+.post-card {
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 8px;
+  overflow: hidden; /* This keeps the image corners rounded */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+/*
+ * Card Image
+*/
+.post-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover; /* This prevents the image from being distorted */
+  display: block;
+}
+
+.post-card-image-placeholder {
+  width: 100%;
+  height: 200px;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6c757d;
+  font-weight: bold;
+}
+
+/*
+ * Card Body (for text content)
+*/
+.post-card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Allows the body to fill remaining space */
+}
+
+.post-card-title {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.post-card-title a {
+  text-decoration: none;
+  color: #212529;
+}
+
+.post-card-excerpt {
+  color: #495057;
+  flex-grow: 1; /* Pushes the metadata to the bottom */
+  margin-bottom: 1rem;
+}
+
+.post-card-meta {
+  font-size: 0.875em;
+  color: #6c757d;
+}
+

@@ -1,0 +1,59 @@
+<%# This form is used for both new posts and editing existing ones %>
+<%= form_with(model: post, local: true) do |form| %>
+
+  <%# Display any validation errors %>
+  <% if post.errors.any? %>
+    <div style="color: red;">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul>
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div style="margin-bottom: 15px;">
+    <%= form.label :title %><br>
+    <%= form.text_field :title, style: "width: 100%;" %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <%= form.label :content %><br>
+    <%= form.text_area :content, rows: 10, style: "width: 100%;" %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <%= form.label :featured_image %>
+    <%# This is the crucial file upload field %>
+    <%= form.file_field :featured_image %>
+
+    <%# Show the current image thumbnail when editing %>
+    <% if post.featured_image.attached? %>
+      <p>Current image:</p>
+      <%= image_tag post.featured_image.variant(:thumb) %>
+    <% end %>
+  </div>
+
+  <hr>
+  <h3>SEO Fields</h3>
+
+  <div style="margin-bottom: 15px;">
+    <%= form.label :meta_title, "Meta Title (for search engines)" %><br>
+    <%= form.text_field :meta_title, style: "width: 100%;" %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <%= form.label :meta_description, "Meta Description (for search engines)" %><br>
+    <%= form.text_area :meta_description, rows: 3, style: "width: 100%;" %>
+  </div>
+
+  <div style="margin-bottom: 15px;">
+    <%= form.label :image_alt, "Image Alt Text (for accessibility and SEO)" %><br>
+    <%= form.text_field :image_alt, style: "width: 100%;" %>
+  </div>
+
+  <div style="margin-top: 20px;">
+    <%= form.submit "Save Post", style: "padding: 10px 20px; background-color: #007bff; color: white; border: none; cursor: pointer;" %>
+  </div>
+<% end %>

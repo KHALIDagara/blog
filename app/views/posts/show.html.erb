@@ -1,0 +1,51 @@
+<%#
+  Template: Post Show Page
+  Description: A centered, container-based layout for displaying a single blog post.
+  You can modify the HTML structure and content within the sections below.
+%>
+
+<div class="post-show-container">
+
+  <!-- ======================= -->
+  <!--    POST HEADER          -->
+  <!-- Contains title & metadata. -->
+  <!-- ======================= -->
+  <header class="post-show-header">
+    <h1><%= @post.title %></h1>
+    <div class="post-show-meta">
+      <small>Posted on: <%= @post.created_at.to_date.strftime("%B %d, %Y") %></small>
+    </div>
+  </header>
+
+
+  <!-- ======================= -->
+  <!--    FEATURED IMAGE       -->
+  <!-- Checks if an image exists before showing. -->
+  <!-- ======================= -->
+  <% if @post.featured_image.attached? %>
+    <figure class="post-show-featured-image">
+      <%= image_tag @post.featured_image.variant(:medium), alt: @post.image_alt %>
+    </figure>
+  <% end %>
+
+
+  <!-- ======================= -->
+  <!--    POST BODY            -->
+  <!-- The main article content goes here. -->
+  <!-- ======================= -->
+  <section class="post-show-body">
+    <%= simple_format(@post.content) %>
+  </section>
+
+
+  <!-- ======================= -->
+  <!--    POST ACTIONS         -->
+  <!-- Links to edit, go back, or delete. -->
+  <!-- ======================= -->
+  <footer class="post-show-actions">
+    <%= link_to 'Edit this post', edit_post_path(@post) %>
+    <%= link_to 'Back to all posts', posts_path %>
+    <%= button_to 'Delete this post', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
+  </footer>
+
+</div>

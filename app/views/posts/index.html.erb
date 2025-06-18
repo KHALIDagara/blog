@@ -1,0 +1,28 @@
+<%# app/views/posts/index.html.erb %>
+
+<%# --- Page Header --- %>
+<% if @tag_name.present? %>
+  <h1><%= @tag_name.capitalize %> News</h1>
+  <p>Showing all articles tagged with <strong><%= @tag_name %></strong>.</p>
+<% else %>
+  <h1>Recent Posts</h1>
+<% end %>
+
+<hr>
+
+<%# --- Posts Grid --- %>
+<% if @posts.any? %>
+  <div class="posts-container">
+    <%# This one magic line renders the _post.html.erb partial for each post in @posts %>
+    <%= render @posts %>
+  </div>
+<% else %>
+  <p>No posts found for this category yet.</p>
+<% end %>
+
+
+<%# --- "Create Post" Button --- %>
+<div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #e9ecef;">
+  <h3>Submit Your Post?</h3>
+  <%= link_to 'Create New Post', new_post_path, style: "display: inline-block; padding: 10px 15px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px;" %>
+</div>
