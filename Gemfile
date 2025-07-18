@@ -68,6 +68,6 @@ gem "friendly_id", "~> 5.5"
 
 gem "meta-tags", "~> 2.22"
 
-gem "json", "~> 2.12"
+gem "json", "~> 2.13"
 
 gem "image_processing", "~> 1.14"
